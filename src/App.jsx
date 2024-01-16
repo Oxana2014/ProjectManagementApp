@@ -3,6 +3,7 @@ import {useState} from 'react'
 import NoProjects from "./components/NoProjects";
 import Sidebar from "./components/Sidebar";
 import Project from './components/Project';
+import NewProject from './components/NewProject';
 
 const PROJECTS = ['Project 1', 'React']
 const PROJ = {title: "Learning React",
@@ -25,7 +26,8 @@ return curProjects
       <main className="h-screen my-8 flex gap-8">
         <Sidebar projects={projects} />
         {projects.length === 0 && <NoProjects />}
-       {projects.length > 0 && <Project project={PROJ}/>}
+<NewProject />
+       {/* {projects.length > 0 && <Project project={PROJ}/>} */}
       </main>
     </>
   );
