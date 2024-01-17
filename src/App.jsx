@@ -35,6 +35,18 @@ function App() {
     });
     setAddProject(false);
   }
+
+  function deleteProjectHandle(index) {
+    setProjects((prevProjects) => {
+      const curProjects = [];
+      for (let i = 0; i < prevProjects.length; i++) {
+        if (i !== index) curProjects.push(prevProjects[i]);
+      }
+      return curProjects;
+    });
+    setHighlighted(0)
+  }
+
   return (
     <>
       {/* <h1 className="my-8 text-center text-5xl font-bold">Hello World</h1> */}
@@ -55,7 +67,7 @@ function App() {
           <NoProjects onAddProject={addProjectButtonHandle} />
         )}
         {!addProject && projects.length > 0 && (
-          <Project project={projects[highlighted]} />
+          <Project project={projects[highlighted]} highlighted={highlighted} onDelete={deleteProjectHandle} />
         )}
       </main>
     </>
