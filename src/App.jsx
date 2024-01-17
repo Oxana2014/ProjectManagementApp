@@ -14,7 +14,7 @@ const PROJ = {
 
 function App() {
   const [addProject, setAddProject] = useState(false);
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([PROJ]);
   const [highlighted, setHighlighted] = useState(0);
 
   function handleChangeHighlighted(index) {

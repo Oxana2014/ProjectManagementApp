@@ -1,3 +1,5 @@
+import Tasks from "./Tasks"
+
 export default function Project({ project, highlighted, onDelete }) {
   return (
     <div className="w-[35rem] mt-16">
@@ -15,6 +17,7 @@ export default function Project({ project, highlighted, onDelete }) {
         <p className="mb-4 text-stone-400">{project.date}</p>
         <p className="text-stone-800 my-4">{project.description}</p>
       </header>
+      <Tasks />
     </div>
   );
 }
