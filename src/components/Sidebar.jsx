@@ -10,7 +10,7 @@ export default function Sidebar({projects, onAddProject}) {
       <ul className="mt-8">
     { projects.map(proj => <button className="w-full text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800" key={Math.random().toString()}>
     <p className="text-stone-400 mb-4">
-        {proj}
+        {proj.title}
         </p>
         </button>)}
       </ul>
