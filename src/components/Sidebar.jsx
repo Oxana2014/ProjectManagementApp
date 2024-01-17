@@ -1,4 +1,4 @@
-export default function Sidebar({projects, onAddProject}) {
+export default function Sidebar({projects, onAddProject, onChangeHighlighted, highlighted}) {
   return (
     <aside className="w-1/3 px-8 py-16 bg-stone-900 text-stone-50 md:w-72 rounded-r-xl">
       <h2 className="mb-8 font-bold uppercase md:text-xl text-stone-200">
@@ -8,8 +8,8 @@ export default function Sidebar({projects, onAddProject}) {
         + Add Project
       </button>
       <ul className="mt-8">
-    { projects.map(proj => <button className="w-full text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800" key={Math.random().toString()}>
-    <p className="text-stone-400 mb-4">
+    { projects.map((proj, index) => <button onClick={() => onChangeHighlighted(index)} className="w-full text-left px-2 py-1 rounded-sm my-1 hover:text-stone-200 hover:bg-stone-800" key={Math.random().toString()}>
+    <p className={ index === highlighted ? "text-stone-200 mb-4" : "text-stone-400 mb-4"}>
         {proj.title}
         </p>
         </button>)}

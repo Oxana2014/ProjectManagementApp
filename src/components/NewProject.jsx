@@ -6,7 +6,7 @@ const description = useRef()
 const date = useRef()
 
 const submitHandler = (event) => {
-event.preventDefault()
+     event.preventDefault()
     const project = {
         title: title.current.value,
         description: description.current.value,
@@ -16,6 +16,7 @@ event.preventDefault()
     description.current.value = ""
     date.current.value = ""
    onSubmit(project)
+  
 }
 
 
