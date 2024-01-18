@@ -1,6 +1,28 @@
+import {useState} from 'react'
 import Tasks from "./Tasks"
 
+const TASKS = ["React learn", "Practice", "Do exercises"]
+
 export default function Project({ project, highlighted, onDelete }) {
+
+    const [tasks, setTasks] = useState(TASKS);
+
+    function addTask(taskName) {
+        setTasks(prevTasks => {
+            const curTasks = [taskName, ...prevTasks]
+            return curTasks
+        }) 
+    }
+    function removeTask(index) {
+        setTasks(prevTasks => {
+            const curTasks = []
+            for(let i = 0; i < prevTasks.length; i++) {
+              if(i !== index)  curTasks.push(prevTasks[i])
+            }
+        return curTasks
+        })
+    }
+
   return (
     <div className="w-[35rem] mt-16">
       <header className="pb-4 mb-4 border-b-2 border-stone-300">
@@ -17,7 +39,7 @@ export default function Project({ project, highlighted, onDelete }) {
         <p className="mb-4 text-stone-400">{project.date}</p>
         <p className="text-stone-800 my-4">{project.description}</p>
       </header>
-      <Tasks />
+      <Tasks onAddTask={addTask} onRemoveTask={removeTask} tasks={tasks}/>
     </div>
   );
 }

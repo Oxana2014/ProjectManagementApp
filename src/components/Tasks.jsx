@@ -2,26 +2,17 @@ import { useState, useRef } from "react";
 
 const TASKS = ["React learn", "Practice", "Do exercises"]
 
-export default function Tasks() {
-  const [tasks, setTasks] = useState(TASKS);
+export default function Tasks({onAddTask, onRemoveTask, tasks}) {
+  
 const taskName = useRef()
 
 function handleSubmit(event) {
 event.preventDefault()
-setTasks(prevTasks => {
-    const curTasks = [taskName.current.value, ...prevTasks]
-    return curTasks
-})
+onAddTask(taskName.current.value)
 taskName.current.value = ''
 }
 function handleClear(index) {
-setTasks(prevTasks => {
-    const curTasks = []
-    for(let i = 0; i < prevTasks.length; i++) {
-      if(i !== index)  curTasks.push(prevTasks[i])
-    }
-return curTasks
-})
+onRemoveTask(index)
 }
 
   return (
