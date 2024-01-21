@@ -15,7 +15,7 @@ function App() {
     setProjectsState((prevProjectsState) => {
       return {
         ...prevProjectsState,
-        selectedProjectId: id, 
+        selectedProjectId: id,
       };
     });
   }
@@ -29,7 +29,7 @@ function App() {
     });
   }
   function handleAddProject(projectData) {
-    const projectId = Math.random().toString()
+    const projectId = Math.random().toString();
     const newProject = { ...projectData, id: projectId };
     setProjectsState((prevProjectsState) => {
       return {
@@ -39,7 +39,19 @@ function App() {
       };
     });
   }
- 
+
+  function handleDeleteProject() {
+    setProjectsState((prevProjectsState) => {
+      return {
+        ...prevProjectsState,
+        selectedProjectId: undefined,
+        projects: prevProjectsState.projects.filter(
+          (project) => project.id !== prevProjectsState.selectedProjectId
+        ),
+      };
+    });
+  }
+
   function handleCancelAddProject() {
     setProjectsState((prevProjectsState) => {
       return {
@@ -49,16 +61,24 @@ function App() {
     });
   }
 
-  const selectedProject = projectsState.projects.find(project => project.id === projectsState.selectedProjectId)
-  let content = <SelectedProject project={selectedProject}/>;
+  const selectedProject = projectsState.projects.find(
+    (project) => project.id === projectsState.selectedProjectId
+  );
+  let content = <SelectedProject onDelete={handleDeleteProject} project={selectedProject} />;
   if (projectsState.selectedProjectId === null) {
-    content = <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject} />;
+    content = (
+      <NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject} />
+    );
   } else if (projectsState.selectedProjectId === undefined) {
     content = <NoProjectSelected onStartAddProject={handleStartAddProject} />;
   }
   return (
     <main className="h-screen my-8 flex gap-8">
-      <ProjectsSidebar onSelectProject={handleSelectProject} projects={projectsState.projects} onStartAddProject={handleStartAddProject} />
+      <ProjectsSidebar
+        onSelectProject={handleSelectProject}
+        projects={projectsState.projects}
+        onStartAddProject={handleStartAddProject}
+      />
       {content}
     </main>
   );
